@@ -3,11 +3,16 @@ let computerScore =0;
 const userScore_span = document.getElementById("user-score");
 const computerScore_span = document.getElementById("computer-score");
 const scoreBoard_div = document.querySelector(".scored-board")
-const result_div = document.querySelector(".result");
+const result_p = document.querySelector(".result > p");
 const rock_div = document.getElementById("r");
 const paper_div = document.getElementById("p");
 const scissors_div = document.getElementById("s");
  
+function convertToWord(letter) {
+    if (letter == "r") return "Rock";
+    if (letter == "p") return "Paper";
+    return "Scissors"
+}
 
 function getComputerChoice(){
     const choices = ['r', 'p', 's']
@@ -19,16 +24,28 @@ function win(userChoice,computerChoice){
     userScore++;
     userScore_span.innerHTML = userScore;
     computerScore_span.innerHTML = computerScore;
-    console.log(userChoice);
-    console.log(computerChoice);
+    const smallUserWord = "user".fontsize(5);
+    const smallComputerWord = "comp".fontsize(5);
+    result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord} beats ${convertToWord(computerChoice)}${smallComputerWord} You win`;
 }
 
-function lose(){
-    console.log("LOSE");
+function lose(userChoice,computerChoice){
+    computerScore++;
+    userScore_span.innerHTML = userScore;
+    computerScore_span.innerHTML = computerScore;
+    const smallUserWord = "user".fontsize(5);
+    const smallComputerWord = "comp".fontsize(5);
+    result_p.innerHTML = `${convertToWord(computerChoice)}${smallComputerWord}  beats ${convertToWord(userChoice)}${smallUserWord}  Computer win`;
 }
 
-function draw(){
-    console.log("DRAW");
+function draw(userChoice,computerChoice){
+    computerScore++
+    userScore++
+    userScore_span.innerHTML = userScore;
+    computerScore_span.innerHTML = computerScore;
+    const smallUserWord = "user".fontsize(5);
+    const smallComputerWord = "comp".fontsize(5);
+    result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord} equal ${convertToWord(computerChoice)}${smallComputerWord} so,its a draw`;
 }
 
 
